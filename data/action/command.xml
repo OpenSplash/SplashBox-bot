@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<action version="20101222001">
+	<meta>
+		<uuid>4a4013f2-c946-449d-ac96-4352a905ea13</uuid>
+		<name>command</name>
+		<author>Youchen Lee</author>
+		<mail>kobe.lee@splashtop.com</mail>
+		<create_date>1293002647</create_date>
+		<update_date>1293002647</update_date>
+		<version>0.1</version>
+		<robot>command</robot>
+	<meta>
+	<data>
+		<uuid>{uuid}</uuid>
+		<user>{user}</user>
+		<create_date>{create_date}</create_date>
+		<update_date>{update_date}</update_date>
+		<raw>{raw}</raw>
+	</data>
+</action>

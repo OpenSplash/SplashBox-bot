@@ -1,0 +1,5 @@
+Packages may need to be pre-installed:
+ - libproc-daemon-perl
+ - libproc-pid-file-perl
+ - libxml-simple-perl
+

@@ -1,0 +1,32 @@
+#! /usr/bin/python
+#
+# chat
+#
+# Copyright (c) 2010 - The OpenSplash Team
+# http://www.opensplash-project.org/
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+import aiml
+
+k = aiml.Kernel()
+k.learn("./aiml/*.aiml")
+k.setBotPredicate('gender', 'male')
+k.setBotPredicate('name', 'OpenSplashBot')
+k.setBotPredicate('age', '15')
+k.setBotPredicate('botmaster', 'Daddy')
+k.setBotPredicate('genus', 'robot')
+
+k.setPredicate('name', 'my Lord')
+while True: print k.respond(raw_input("> "))

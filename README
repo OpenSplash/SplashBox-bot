@@ -1,0 +1,11 @@
+SplashBox Natural Language Framework
+
+ - Run "cd action/ && ./download-aiml.sh" first before the A.L.I.C.E chatterbot can start running.
+
+
+LICENSES:
+ - Chatbot and AIML files by the A.L.I.C.E Foundation
+   - http://www.alicebot.org/aiml/aaa/
+
+ - python-aiml libraries
+   - http://pyaiml.sourceforge.net/
