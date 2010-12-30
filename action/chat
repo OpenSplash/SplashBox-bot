@@ -22,7 +22,7 @@ use strict;
 use warnings;
 
 use Net::DBus;
-use Net::DBus::Reactor;
+#use Net::DBus::Reactor;
 
 my $message = $ARGV[0];
 
@@ -31,24 +31,6 @@ my $chat = Net::DBus->session
 	->get_object('/org/opensplash/bot/Chat')
 ;
 
-# Invoke a method on the test object
 my $greeting = $chat->hello($message);
 print "$greeting\n";
-
-
-# Use the Reactor for the event loop
-my $reactor = Net::DBus::Reactor->main();
-# Give the service 5 a few seconds to live
-my $timer = $reactor->add_timeout(
-	6_000,
-	Net::DBus::Callback->new(
-		method => sub {
-			$reactor->shutdown();
-			print "Shutdown\n";
-		}
-	)
-);
-
-# Start the main loop
-$reactor->run();
 
