@@ -1,4 +1,4 @@
-#! /usr/bin/python
+#!/usr/bin/perl
 #
 # chat
 #
@@ -18,15 +18,37 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import aiml
+use strict;
+use warnings;
 
-k = aiml.Kernel()
-k.learn("./aiml/*.aiml")
-k.setBotPredicate('gender', 'male')
-k.setBotPredicate('name', 'OpenSplashBot')
-k.setBotPredicate('age', '15')
-k.setBotPredicate('botmaster', 'Daddy')
-k.setBotPredicate('genus', 'robot')
+use Net::DBus;
+use Net::DBus::Reactor;
 
-k.setPredicate('name', 'my Lord')
-while True: print k.respond(raw_input("> "))
+my $message = $ARGV[0];
+
+my $chat = Net::DBus->session
+	->get_service('org.opensplash.bot')
+	->get_object('/org/opensplash/bot/Chat')
+;
+
+# Invoke a method on the test object
+my $greeting = $chat->hello($message);
+print "$greeting\n";
+
+
+# Use the Reactor for the event loop
+my $reactor = Net::DBus::Reactor->main();
+# Give the service 5 a few seconds to live
+my $timer = $reactor->add_timeout(
+	6_000,
+	Net::DBus::Callback->new(
+		method => sub {
+			$reactor->shutdown();
+			print "Shutdown\n";
+		}
+	)
+);
+
+# Start the main loop
+$reactor->run();
+

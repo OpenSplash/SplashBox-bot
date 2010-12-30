@@ -1,0 +1,53 @@
+#!/usr/bin/python
+#
+# chat-service
+#
+# Copyright (c) 2010 - The OpenSplash Team
+# http://www.opensplash-project.org/
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+import gtk
+import dbus
+import dbus.service
+import aiml
+import os
+import getpass
+
+from dbus.mainloop.glib import DBusGMainLoop
+ 
+class DBusBotService(dbus.service.Object):
+
+	bot = aiml.Kernel()
+
+	def __init__(self):
+		bus_name = dbus.service.BusName('org.opensplash.bot', bus=dbus.SessionBus())
+		dbus.service.Object.__init__(self, bus_name, '/org/opensplash/bot/Chat')
+		self.bot.learn("./aiml/*.aiml")
+
+		self.bot.setBotPredicate('gender', 'male')
+		self.bot.setBotPredicate('name', 'OpenSplashBot')
+		self.bot.setBotPredicate('age', '15')
+		self.bot.setBotPredicate('botmaster', 'Daddy')
+		self.bot.setBotPredicate('genus', 'robot')
+
+		self.bot.setPredicate('name', getpass.getuser() )
+	@dbus.service.method('org.opensplash.bot.Chat',  in_signature='s', out_signature='s')
+	def hello(self, strin):
+		return self.bot.respond(strin)
+ 
+DBusGMainLoop(set_as_default=True)
+service = DBusBotService()
+gtk.main()
+
