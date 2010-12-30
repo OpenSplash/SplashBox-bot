@@ -1,0 +1,14 @@
+=== The Message Flow ===
+ 
+
+                         message    +-------------+                    No   +------+
+ (Some User Frontend) ----------->  | parser-0.pl | ----> (Action?) ------> | Chat | ---> User
+                                    +-------------+           |             +------+
+                                                              |               |
+                                        +----------------+    | yes           |   +--------------+
+				        | Action Storage | <--+               +<--+ Chat Service |
+                                        +----------------+                        +--------------+
+                                        read |
+ +------------------+                        |                      +--> Commnad Bot
+ | SplashBox Daemon |--->----------------->--+-----> (Take Action)--+--> IM Bot       ----> User
+ +------------------+                                               +--> Others...
