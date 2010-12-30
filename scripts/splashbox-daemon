@@ -22,14 +22,19 @@ use strict;
 use warnings;
 use Proc::Daemon;
 use Proc::PID::File;
+use XML::Simple;
+use Data::Dumper;
 
 my $DIR_XML='/tmp/splashbox';
 my @jobs;
+my $xml = new XML::Simple;
 
 sub check_job {
 	@jobs = <$DIR_XML/now/*.xml>;
 	foreach my $thisjob (@jobs) {
 		print "$thisjob\n";
+		my $data = $xml->XMLin("$thisjob");
+		print Dumper($data);
 	}
 }
 

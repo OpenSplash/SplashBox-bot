@@ -20,6 +20,7 @@
 
 use strict;
 use warnings;
+use UUID;
 
 my $DATA_PATH = '../data';
 my $ACTION_PATH = '/tmp/splashbox/';
@@ -53,11 +54,18 @@ sub dispatcher {
 	undef $/;
 	my $raw_xml = <FH>;
 	my $raw = '';
+	my ($uuid, $uuid_string);
+	UUID::generate($uuid);
+	UUID::unparse($uuid, $uuid_string);
+	my $epoch_seconds = time();
+
 	foreach my $data (@ARGV) {
 		$raw = "$raw$data ";
 	}
-	$raw_xml = &fill_xml ($raw_xml, "user='$ENV{USER}';raw='$raw'");
-	open (FH_WRITE, ">$ACTION_PATH/$action.xml");
+	$raw_xml = &fill_xml ($raw_xml, "user='$ENV{USER}';raw='$raw';uuid='$uuid_string';create_date='$epoch_seconds'");
+
+
+	open (FH_WRITE, ">$ACTION_PATH/now/$uuid_string.xml");
 	print FH_WRITE $raw_xml;
 	close (FH_WRITE);
 	close (FH);
