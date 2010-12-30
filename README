@@ -4,7 +4,7 @@ Use the following steps to run the service:
  - Download aiml files:
    - cd service/aiml && ./download-aiml.sh
  - Run chat server. (The chatbot brain)
-   - ./service/chat-service &
+   - cd ./service/ && ./chat-service &
 
 Available Bots Now:
  - A chat bot: action/chat
