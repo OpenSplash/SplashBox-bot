@@ -1,0 +1,7 @@
+Author: Youchen Lee <kobe.lee@splashtop.com>
+Date:   Thu Dec 30 17:13:45 2010 +0800
+	- Add HACKING, ChangeLog and TODO
+	- Pass unknown messages to the Chat Bot
+	- Better log.
+	- SplashBox Daemon can now trigger robots.
+

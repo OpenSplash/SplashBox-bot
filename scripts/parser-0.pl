@@ -1,6 +1,6 @@
 #! /usr/bin/perl
 #
-# command
+# parser-0.pl
 #
 # Copyright (c) 2010 - The OpenSplash Team
 # http://www.opensplash-project.org/
@@ -24,6 +24,7 @@ use UUID;
 
 my $DATA_PATH = '../data';
 my $ACTION_PATH = '/tmp/splashbox/';
+my $BOT_PATH = '../action';
 
 my @list_action = <$DATA_PATH/action/*.xml>;
 my $action;
@@ -31,6 +32,9 @@ my $action;
 my @list_time = <$DATA_PATH/time/*.xml>;
 my $time;
 
+sub show_log {
+	printf (STDERR "- %20s - %s\n", "[$0]",  @_);
+}
 
 sub fill_xml {
 	my $raw_xml = "$_[0]";
@@ -67,6 +71,7 @@ sub dispatcher {
 
 	open (FH_WRITE, ">$ACTION_PATH/now/$uuid_string.xml");
 	print FH_WRITE $raw_xml;
+	show_log "File: $ACTION_PATH/now/$uuid_string.xml is created!";
 	close (FH_WRITE);
 	close (FH);
 }
@@ -83,13 +88,15 @@ sub init {
 
 &init;
 
+my $is_chat_message = 1;
 foreach $action (@list_action) {
 	$action =~ s#.*/##;
 	$action =~ s#\.xml##;
 
 	if ("@ARGV" =~ /\b$action\b/i )
 	{
-		print "Got $action\n";
+		show_log "Got action='$action'";
+		$is_chat_message = 0;
 		&dispatcher ($action, "@ARGV");
 		last;
 	}
@@ -102,8 +109,14 @@ foreach $time (@list_time) {
 
 	if ("@ARGV" =~ /\b$time\b/i )
 	{
-		print "Got $time\n";
+		show_log "Got time='$time'";
 		last;
 	}
+}
+
+# Pass unknown messages to the chat bot.
+if ( $is_chat_message eq 1 )
+{
+	system("$BOT_PATH/chat \"@ARGV\"");
 }
 
