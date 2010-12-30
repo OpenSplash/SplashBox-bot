@@ -1,6 +1,12 @@
+There is currently no installation needed.
+
 Packages may need to be pre-installed:
  - libproc-daemon-perl
  - libproc-pid-file-perl
  - libxml-simple-perl
  - libuuid-perl
+ - python-dbus
+
+ - python-aiml libraries <http://pyaiml.sourceforge.net>
+
 

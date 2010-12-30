@@ -1,11 +1,26 @@
 SplashBox Natural Language Framework
 
- - Run "cd service/aiml && ./download-aiml.sh" first before the A.L.I.C.E chatterbot can start running.
+Use the following steps to run the service:
+ - Download aiml files:
+   - cd service/aiml && ./download-aiml.sh
+ - Run chat server. (The chatbot brain)
+   - ./service/chat-service &
+
+Available Bots Now:
+ - A chat bot: action/chat
+ - A command bot: action/command
+
+The Level-0 natural language parser: (not fully ready)
+ - Action parser
+   - ./scripts/parser-0.pl run firefox --> /tmp/splashbox/now/UUID.xml will be created.
+
+ - Chat messages (Not implemented)
+   - All other messages will be all sent to action/chat as a chat messages.
+
 
 
 LICENSES:
- - Chatbot and AIML files by the A.L.I.C.E Foundation
-   - http://www.alicebot.org/aiml/aaa/
+ - All documents and codes are licensed under GPLv3
 
- - python-aiml libraries
-   - http://pyaiml.sourceforge.net/
+ - AIML files copyright by the A.L.I.C.E Foundation, please download them yourself if necessary with the download-aiml.sh command
+   - http://www.alicebot.org/aiml/aaa/
