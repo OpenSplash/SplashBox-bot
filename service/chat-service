@@ -24,17 +24,23 @@ import dbus.service
 import aiml
 import os
 import getpass
+import glob
+import sys
 
 from dbus.mainloop.glib import DBusGMainLoop
  
 class DBusBotService(dbus.service.Object):
 
 	bot = aiml.Kernel()
+	aiml_file = './aiml/*.aiml';
 
 	def __init__(self):
 		bus_name = dbus.service.BusName('org.opensplash.bot', bus=dbus.SessionBus())
 		dbus.service.Object.__init__(self, bus_name, '/org/opensplash/bot/Chat')
-		self.bot.learn("./aiml/*.aiml")
+		if len( glob.glob (self.aiml_file) ) == 0:
+			sys.stderr.write("ERROR: No AIML files found. Cannot start service.\n")
+			sys.exit(1);
+		self.bot.learn(self.aiml_file)
 
 		self.bot.setBotPredicate('gender', 'male')
 		self.bot.setBotPredicate('name', 'OpenSplashBot')
