@@ -21,10 +21,13 @@
 use strict;
 use warnings;
 use UUID;
+use Cwd 'abs_path';
+my $ABS_PATH = abs_path($0);
+$ABS_PATH =~ s#(.*/).*#$1#;
 
-my $DATA_PATH = '../data';
+my $DATA_PATH = $ABS_PATH . '../data';
 my $ACTION_PATH = '/tmp/splashbox/';
-my $BOT_PATH = '../action';
+my $BOT_PATH = $ABS_PATH . '../action';
 
 my @list_action = <$DATA_PATH/action/*.xml>;
 my $action;

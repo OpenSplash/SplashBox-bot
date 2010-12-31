@@ -25,8 +25,13 @@ use Proc::PID::File;
 use XML::Simple;
 use Data::Dumper;
 
-my $DIR_XML='/tmp/splashbox';
-my $BOT_PATH='../action/';
+use Cwd 'abs_path';
+my $ABS_PATH = abs_path($0);
+$ABS_PATH =~ s#(.*/).*#$1#;
+
+
+my $DIR_XML = '/tmp/splashbox';
+my $BOT_PATH = $ABS_PATH . '../action/';
 my @jobs;
 my $xml = new XML::Simple;
 

@@ -1,4 +1,9 @@
 Author: Youchen Lee <kobe.lee@splashtop.com>
+Date:	Fri Dec 31 19:20:58 2010 +0800
+	- Add quick-start.sh help to start the service.
+	- Fix some path.
+
+Author: Youchen Lee <kobe.lee@splashtop.com>
 Date:   Thu Dec 30 17:13:45 2010 +0800
 	- Add HACKING, ChangeLog and TODO
 	- Pass unknown messages to the Chat Bot

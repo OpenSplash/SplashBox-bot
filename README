@@ -1,20 +1,17 @@
 SplashBox Natural Language Framework
 
-Use the following steps to run the service:
- - Download aiml files:
-   - cd service/aiml && ./download-aiml.sh
- - Run chat server. (The chatbot brain)
-   - cd ./service/ && ./chat-service &
+Use the following steps to run the service and test it:
+ - ./quick-start.sh
 
 Available Bots Now:
  - A chat bot: action/chat
  - A command bot: action/command
 
-The Level-0 natural language parser: (not fully ready)
+The Level-0 natural language parser
  - Action parser
    - ./scripts/parser-0.pl run firefox --> /tmp/splashbox/now/UUID.xml will be created.
 
- - Chat messages (Not implemented)
+ - Chat messages 
    - All other messages will be all sent to action/chat as a chat messages.
 
 
