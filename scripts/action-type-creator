@@ -1,0 +1,78 @@
+#!/usr/bin/perl
+#
+# action-type-creator - Script to create a totally new type of actions.
+#
+# Copyright (c) 2010 - The OpenSplash Team
+# http://www.opensplash-project.org/
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+use strict;
+use warnings;
+use UUID;
+use Cwd 'abs_path';
+
+my $ABS_PATH = abs_path($0);
+$ABS_PATH =~ s#(.*/).*#$1#;
+
+my $ACTION_PATH = $ABS_PATH . '../data/action';
+my $TEMPLATE_PATH = $ABS_PATH . '../data/templates';
+if ( $#ARGV + 1 != 5 ) {
+	print "5 Arguements needed!\n";
+	print "action-type-creator <AUTHOR> <MAIL> <ACTION NAME> <ROBOT NAME> <VERSION>\n";
+	exit 1;
+}
+
+my ($author, $mail, $name, $robot, $version) = @ARGV;
+my $action_name = $name;
+
+if ( -e "$ACTION_PATH/$name.xml" )
+{
+	print "$ACTION_PATH/$name.xml exists!\n";
+	exit 1;
+}
+
+open (FH, "$TEMPLATE_PATH/action.xml") or die $!;
+undef $/;
+my $raw_xml = <FH>;
+
+my ($uuid, $uuid_string);
+UUID::generate($uuid);
+UUID::unparse($uuid, $uuid_string);
+my $epoch_seconds = time();
+
+my %subs_array = (
+	author => "$author",
+	uuid => "$uuid_string",
+	create_date => "$epoch_seconds",
+	update_date => "$epoch_seconds",
+	name => "$name",
+	robot => "$robot",
+	mail => "$mail",
+	version => "$version"
+);
+
+
+foreach my $key (keys %subs_array){
+	$raw_xml =~ s/\[$key\]/$subs_array{$key}/g;
+}
+
+open (FH_WRITE, "> $ACTION_PATH/$action_name.xml") or die $!;
+print FH_WRITE $raw_xml or die $!;
+
+print STDERR "Action: $ACTION_PATH/$action_name.xml is created!\n";
+
+close (FH_WRITE);
+close (FH);
+

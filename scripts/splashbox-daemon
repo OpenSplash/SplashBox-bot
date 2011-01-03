@@ -38,7 +38,6 @@ my $xml = new XML::Simple;
 sub check_job {
 	@jobs = <$DIR_XML/now/*.xml>;
 	foreach my $thisjob (@jobs) {
-#		print "$thisjob\n";
 		my $data = $xml->XMLin("$thisjob");
 #		print Dumper($data);
 		my $user = $data->{'data'}->{'user'};
@@ -47,9 +46,14 @@ sub check_job {
 
 		# Call robot.
 		printf STDERR ("%s runs '%s %s'\n", $user, $BOT_PATH . $robot, $raw);
-		system("$BOT_PATH$robot '$raw'");
-
-		unlink $thisjob;
+		if ( -x "$BOT_PATH$robot" ) {
+			system("$BOT_PATH$robot '$raw'");
+			unlink $thisjob;
+		}
+		else
+		{
+			print STDERR "No robot $BOT_PATH$robot found.\n";
+		}
 	}
 }
 

@@ -1,4 +1,10 @@
 Author: Youchen Lee <kobe.lee@splashtop.com>
+Date:	Mon Jan  3 18:41:02 2011 +0800
+	- Add action-type-creator helps to create new action.
+	- Impliment new action "google" and "search"
+	- Small improvement of parser-0 and splashbox-daemon.
+
+Author: Youchen Lee <kobe.lee@splashtop.com>
 Date:	Fri Dec 31 19:20:58 2010 +0800
 	- Add quick-start.sh help to start the service.
 	- Fix some path.

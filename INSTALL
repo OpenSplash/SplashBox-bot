@@ -5,8 +5,8 @@ Packages may need to be pre-installed:
  - libproc-pid-file-perl
  - libxml-simple-perl
  - libuuid-perl
+ - liburi-perl
  - python-dbus
-
- - python-aiml libraries <http://pyaiml.sourceforge.net>
+ - python-aiml
 
 

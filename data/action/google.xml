@@ -2,7 +2,7 @@
 <action version="20101222001">
 	<meta>
 		<uuid>4077912f-cda4-4518-a508-ff2850648477</uuid>
-		<name>search</name>
+		<name>google</name>
 		<author>Youchen Lee</author>
 		<mail>kobe.lee@splashtop.com</mail>
 		<create_date>1294043215</create_date>

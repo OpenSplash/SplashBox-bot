@@ -57,7 +57,7 @@ sub fill_xml {
 sub dispatcher {
 	my $action = "$_[0]";
 	my $args = "$_[1]";
-	open (FH, "$DATA_PATH/action/$action.xml");
+	open (FH, "< $DATA_PATH/action/$action.xml") or die $!;
 	undef $/;
 	my $raw_xml = <FH>;
 	my $raw = '';
@@ -72,7 +72,7 @@ sub dispatcher {
 	$raw_xml = &fill_xml ($raw_xml, "user='$ENV{USER}';raw='$raw';uuid='$uuid_string';create_date='$epoch_seconds'");
 
 
-	open (FH_WRITE, ">$ACTION_PATH/now/$uuid_string.xml");
+	open (FH_WRITE, "> $ACTION_PATH/now/$uuid_string.xml") or die $!;
 	print FH_WRITE $raw_xml;
 	show_log "File: $ACTION_PATH/now/$uuid_string.xml is created!";
 	close (FH_WRITE);

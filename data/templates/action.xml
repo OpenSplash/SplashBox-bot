@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<action version="20110103001">
+	<meta>
+		<uuid>[uuid]</uuid>
+		<name>[name]</name>
+		<author>[author]</author>
+		<mail>[mail]</mail>
+		<create_date>[create_date]</create_date>
+		<update_date>[update_date]</update_date>
+		<version>[version]</version>
+		<robot>[robot]</robot>
+		<depend><depend>
+	</meta>
+	<data>
+		<uuid>{uuid}</uuid>
+		<user>{user}</user>
+		<create_date>{create_date}</create_date>
+		<update_date>{update_date}</update_date>
+		<raw>{raw}</raw>
+	</data>
+</action>
