@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<action version="20110103001">
+	<meta>
+		<uuid>8a85592c-743a-49d1-8395-0eaa42360a42</uuid>
+		<name>echo</name>
+		<author>Youchen Lee</author>
+		<mail>kobe.lee@splashtop.com</mail>
+		<create_date>1294121272</create_date>
+		<update_date>1294121272</update_date>
+		<version>0.1</version>
+		<robot>echobot</robot>
+		<depend><depend>
+	</meta>
+	<data>
+		<uuid>{uuid}</uuid>
+		<user>{user}</user>
+		<create_date>{create_date}</create_date>
+		<update_date>{update_date}</update_date>
+		<raw>{raw}</raw>
+	</data>
+</action>

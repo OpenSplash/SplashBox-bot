@@ -1,6 +1,5 @@
-#!/bin/bash
 #
-# search
+# SplashBox SplashBox.pm
 #
 # Copyright (c) 2010-2011  The OpenSplash Team
 # http://www.opensplash-project.org/
@@ -17,11 +16,31 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+package SplashBox;
 
-term=$*
+use strict;
+use warnings;
 
-term=$(echo $term | sed -e 's/search//i')
+our $VERSION = '0.0.1';
 
-term_encoded=$(perl -MURI::Escape -e "print uri_escape('$term');")
-nohup xdg-open "http://www.google.com/search?q=$term_encoded" > /dev/null &
+use Cwd 'abs_path';
+use base qw(Exporter);
+our @EXPORT = qw($ABS_PATH $JOB_PATH $BOT_PATH $DATA_PATH $ACTION_PATH $TEMPLATE_PATH $progname);
+
+our ($progname) = $0 =~ m#(?:.*/)?([^/]*)#;
+
+# The following lines are automatically fixed at install time
+our ($ABS_PATH) = abs_path($0) =~ m#(.*/).*#;
+our $JOB_PATH = '/tmp/splashbox';
+our $BOT_PATH = $ABS_PATH . '../action/';
+our $DATA_PATH = $ABS_PATH . '../data/';
+our $ACTION_PATH = $DATA_PATH . 'action';
+our $TEMPLATE_PATH = $DATA_PATH . 'templates';
+
+sub show_log
+{
+	printf (STDERR "- %20s - %s\n", "[$progname]",  @_);
+}
+
+1;
 

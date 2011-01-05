@@ -19,13 +19,30 @@ if [ $is_chat_daemon_running -lt 1 ]; then
 else
 	echo " ==== Starting chat-service ==== " >&2
 	echo " ==== A chat-service is already running in background, skip this step ==== " >&2
-	sleep 2
 fi
 
+is_splashbox_daemon_running=$(ps aux | grep splashbox-daemon | grep -v grep | wc -l)
 
-sleep 2
+if [ $is_splashbox_daemon_running -lt 1 ]; then
+	echo " ==== Starting SplashBox Main Daemon ==== " >&2
+	#TODO redirect log somewhere.
+	nohup $ABS_BASE/scripts/splashbox-daemon &
+	sleep 1
+fi
+
+sleep 1
 echo " ==== Chat service started ==== " >&2
-echo " ==== Run \"$ABS_BASE/scripts/parser-0.pl hello\" to test the language parser to A.I. chatbot ==== " >&2
-echo " ==== Run \"$ABS_BASE/scripts/parser-0.pl run xterm\" to test the language parser to command bot ==== " >&2
-echo " ==== Run \"$ABS_BASE/scripts/splashbox-daemon\" to test the action daemon. ==== " >&2
+echo " ==== !!! Remember to set your PERLLIB manually: " >&2
+echo "      export PERLLIB=$ABS_BASE/scripts/ " >&2
+echo "" >&2
+echo " ==== Then try it by these commands: " >&2
+echo "        - Chat with the A.I. chatbot: " >&2
+echo "          $ABS_BASE/scripts/splashbox-parser0 how are you" >&2
+echo "" >&2
+echo "        - Tell the command bot to run a command: " >&2
+echo "          $ABS_BASE/scripts/splashbox-parser0 run xterm" >&2
+echo "" >&2
+echo "        - Try a google search: " >&2
+echo "          $ABS_BASE/scripts/splashbox-parser0 search OpenSplash-project" >&2
+echo " ======================================================================" >&2
 

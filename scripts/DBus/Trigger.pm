@@ -1,6 +1,5 @@
-#!/bin/bash
 #
-# search
+# DBus::Trigger Trigger.pm
 #
 # Copyright (c) 2010-2011  The OpenSplash Team
 # http://www.opensplash-project.org/
@@ -18,10 +17,32 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-term=$*
+package DBus::Trigger;
 
-term=$(echo $term | sed -e 's/search//i')
+use strict;
+use warnings;
+use SplashBox::Job::Trigger;
 
-term_encoded=$(perl -MURI::Escape -e "print uri_escape('$term');")
-nohup xdg-open "http://www.google.com/search?q=$term_encoded" > /dev/null &
+use Net::DBus::Exporter qw(org.opensplash.bot.job);
 
+use base qw(Net::DBus::Object);
+
+sub new {
+	my $class = shift;
+	my $service = shift;
+
+	my $self = $class->SUPER::new($service, "/org/opensplash/bot/job/Trigger");
+	bless $self, $class;
+
+	return $self;
+}
+
+
+dbus_method("check_job", [], []);
+
+sub check_job {
+	my $self = shift;
+	my $name = shift;
+	SplashBox::Job::Trigger::check_job();
+}
+1;

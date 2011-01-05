@@ -1,4 +1,11 @@
 Author: Youchen Lee <kobe.lee@splashtop.com>
+Date:	Wed Jan  5 17:12:57 2011 +0800
+	- SplashBox module.
+	- Call check_job via DBus.
+	- Rename scripts with splashbox- prefix.
+	- Add echobot and docs about how to create a bot in HACKING.
+
+Author: Youchen Lee <kobe.lee@splashtop.com>
 Date:	Mon Jan  3 18:41:02 2011 +0800
 	- Add action-type-creator helps to create new action.
 	- Impliment new action "google" and "search"

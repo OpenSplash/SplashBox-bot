@@ -2,7 +2,7 @@
  
 
                          message    +-------------+                    No   +------+
- (Some User Frontend) ----------->  | parser-0.pl | ----> (Action?) ------> | Chat | ---> User
+ (Some User Frontend) ----------->  | parser0     | ----> (Action?) ------> | Chat | ---> User
                                     +-------------+           |             +------+
                                                               |               |
                                         +----------------+    | yes           |   +--------------+
@@ -12,3 +12,20 @@
  +------------------+                        |                      +--> Commnad Bot
  | SplashBox Daemon |--->----------------->--+-----> (Take Action)--+--> IM Bot       ----> User
  +------------------+                                               +--> Others...
+
+=== How to Create a Bot ===
+ * Create your new own bot is extremely easy!
+
+ * The following we will create a bot named "yobot" triggered by the action "yo"
+ * To create an action "yo" and point it to "yobot", run the command:
+ ./scripts/splashbox-action-creator "Your Name" your@email.com yo yobot 0.0.1
+
+ * Copy echobot to yobot as a template.
+ cp ./action/echobot ./action/yobot
+
+ * Now edit your new bot to design what it will do for you.
+ vim ./action/yobot
+
+ * Your bot will be triggered by "./scripts/splashbox-parser0 yo MESSAGES" and take MESSAGES as the arguments.
+ ** (Make sure splashbox-daemon is running)
+

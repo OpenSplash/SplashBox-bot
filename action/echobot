@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# search
+# echobot - A sample bot accept the echo action.
 #
 # Copyright (c) 2010-2011  The OpenSplash Team
 # http://www.opensplash-project.org/
@@ -18,10 +18,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-term=$*
+args=$*
 
-term=$(echo $term | sed -e 's/search//i')
-
-term_encoded=$(perl -MURI::Escape -e "print uri_escape('$term');")
-nohup xdg-open "http://www.google.com/search?q=$term_encoded" > /dev/null &
+echo $args
 

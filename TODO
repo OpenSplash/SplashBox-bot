@@ -1,4 +1,5 @@
 = TODOs =
  - Time Parser. (Later and Routine sections.)
  - Global configs
- - Improve data and script pathes.
+ - Use perl Template instead of string repleace in parser and action-type-creator
+ - Dbus interface to call the splashbox-daemon to check the tasks now.

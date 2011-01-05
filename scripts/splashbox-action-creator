@@ -1,8 +1,8 @@
 #!/usr/bin/perl
 #
-# action-type-creator - Script to create a totally new type of actions.
+# splashbox-action-creator - Script to create new actions.
 #
-# Copyright (c) 2010 - The OpenSplash Team
+# Copyright (c) 2010-2011  The OpenSplash Team
 # http://www.opensplash-project.org/
 #
 # This program is free software; you can redistribute it and/or modify
@@ -21,16 +21,14 @@
 use strict;
 use warnings;
 use UUID;
-use Cwd 'abs_path';
+use SplashBox;
 
-my $ABS_PATH = abs_path($0);
-$ABS_PATH =~ s#(.*/).*#$1#;
+sub usage() {
+	printf( "Usage: %s <AUTHOR> <MAIL> <ACTION NAME> <ROBOT NAME> <VERSION>\n", $progname);	
+}
 
-my $ACTION_PATH = $ABS_PATH . '../data/action';
-my $TEMPLATE_PATH = $ABS_PATH . '../data/templates';
 if ( $#ARGV + 1 != 5 ) {
-	print "5 Arguements needed!\n";
-	print "action-type-creator <AUTHOR> <MAIL> <ACTION NAME> <ROBOT NAME> <VERSION>\n";
+	usage();
 	exit 1;
 }
 
