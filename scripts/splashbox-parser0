@@ -28,12 +28,12 @@ use SplashBox::Language::Parser;
 
 
 sub init {
-	if ( ! -e "$ACTION_PATH" ) {
-		system "mkdir -p $ACTION_PATH";
+	if ( ! -e "$JOB_PATH" ) {
+		system "mkdir -p $JOB_PATH";
 	}
-	system "mkdir -p $ACTION_PATH/now";
-	system "mkdir -p $ACTION_PATH/later";
-	system "mkdir -p $ACTION_PATH/routine";
+	system "mkdir -p $JOB_PATH/now";
+	system "mkdir -p $JOB_PATH/later";
+	system "mkdir -p $JOB_PATH/routine";
 
 }
 
