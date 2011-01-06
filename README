@@ -4,16 +4,15 @@ Use the following steps to run the service and test it:
  - ./quick-start.sh
 
 Available Bots Now:
- - A chat bot: action/chat
- - A command bot: action/command
-
-The Level-0 natural language parser
- - Action parser
-   - ./scripts/parser-0.pl run firefox --> /tmp/splashbox/now/UUID.xml will be created.
-
- - Chat messages 
-   - All other messages will be all sent to action/chat as a chat messages.
-
+ - A chat bot (default):
+	chat
+ - A command bot: 
+ 	command
+ - A echo bot:
+ 	echo
+ - A search bot:
+ 	search
+	google
 
 
 LICENSES:

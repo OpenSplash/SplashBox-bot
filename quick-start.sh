@@ -26,7 +26,8 @@ is_splashbox_daemon_running=$(ps aux | grep splashbox-daemon | grep -v grep | wc
 if [ $is_splashbox_daemon_running -lt 1 ]; then
 	echo " ==== Starting SplashBox Main Daemon ==== " >&2
 	#TODO redirect log somewhere.
-	nohup $ABS_BASE/scripts/splashbox-daemon &
+	cd $ABS_BASE/scripts/
+	nohup ./splashbox-daemon &
 	sleep 1
 fi
 
