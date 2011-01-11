@@ -24,6 +24,7 @@ use warnings;
 
 use UUID;
 use SplashBox;
+use SplashBox::Job::Trigger;
 
 sub new {
 	my ($this, %opts) = @_;
@@ -37,40 +38,75 @@ sub new {
 
 sub fill_xml {
 	my ($self, $raw_xml, $args) = @_;
-        my %subsitution_array = split(/[;=]/, $args);
+	my %subsitution_array = split(/[;=]/, $args);
 
-        foreach my $key (keys %subsitution_array){
-                $subsitution_array{$key} =~ s/["']//g;
-                #print "$key = ";
-                #print "$subsitution_array{$key}\n";
+	foreach my $key (keys %subsitution_array){
+		$subsitution_array{$key} =~ s/["']//g;
+		#print "$key = ";
+		#print "$subsitution_array{$key}\n";
 
-                $raw_xml =~ s/{$key}/$subsitution_array{$key}/g;
-        }
-        return $raw_xml;
+		$raw_xml =~ s/{$key}/$subsitution_array{$key}/g;
+	}
+	return $raw_xml;
 }
 
 sub dispatcher {
 	my ($self, $action, $args) = @_;
-        open (FH, "< $DATA_PATH/action/$action.xml") or die $!;
-        undef $/;
-        my $raw_xml = <FH>;
-        my $raw = '';
-        my ($uuid, $uuid_string);
-        UUID::generate($uuid);
-        UUID::unparse($uuid, $uuid_string);
-        my $epoch_seconds = time();
+	open (FH, "< $DATA_PATH/action/$action.xml") or die $!;
+	undef $/;
+	my $raw_xml = <FH>;
+	my ($uuid, $uuid_string);
+	UUID::generate($uuid);
+	UUID::unparse($uuid, $uuid_string);
+	my $epoch_seconds = time();
 
-        foreach my $data (@ARGV) {
-                $raw = "$raw$data ";
-        }
-        $raw_xml = $self->fill_xml ($raw_xml, "user='$ENV{USER}';raw='$raw';uuid='$uuid_string';create_date='$epoch_seconds'");
+	$raw_xml = $self->fill_xml ($raw_xml, "user='$ENV{USER}';raw='$args';uuid='$uuid_string';create_date='$epoch_seconds'");
 
 
-        open (FH_WRITE, "> $JOB_PATH/now/$uuid_string.xml") or die $!;
-        print FH_WRITE $raw_xml;
-        SplashBox::show_log ("File: $JOB_PATH/now/$uuid_string.xml is created!");
-        close (FH_WRITE);
-        close (FH);
+	open (FH_WRITE, "> $JOB_PATH/now/$uuid_string.xml") or die $!;
+	print FH_WRITE $raw_xml;
+	SplashBox::show_log ("File: $JOB_PATH/now/$uuid_string.xml is created!");
+	close (FH_WRITE);
+	close (FH);
 }
+
+sub parser {
+	my ($self, $msg) = @_;
+	my $is_chat_message = 1;
+	my @list_action = <$DATA_PATH/action/*.xml>;
+	my $action;
+	my @list_time = <$DATA_PATH/time/*.xml>;
+	my $time;
+
+
+	foreach $action (@list_action) {
+		$action =~ s#.*/##;
+		$action =~ s#\.xml##;
+
+		if ("$msg" =~ /\b$action\b/i )
+		{
+			SplashBox::show_log ("Got action='$action'");
+			$is_chat_message = 0;
+			$self->dispatcher ($action, "$msg");
+			last;
+		}
+	}
+
+	foreach $time (@list_time) {
+		$time =~ s#.*/##;
+		$time =~ s#\.xml##;
+		$time =~ s#_# #;
+
+		if ("$msg" =~ /\b$time\b/i )
+		{
+			SplashBox::show_log ("Got time='$time'");
+			last;
+		}
+	}
+	
+	SplashBox::Job::Trigger::check_job();
+	return $is_chat_message;
+}
+
 
 1;

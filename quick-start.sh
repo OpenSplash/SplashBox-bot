@@ -38,12 +38,12 @@ echo "      export PERLLIB=$ABS_BASE/scripts/ " >&2
 echo "" >&2
 echo " ==== Then try it by these commands: " >&2
 echo "        - Chat with the A.I. chatbot: " >&2
-echo "          $ABS_BASE/scripts/splashbox-parser0 how are you" >&2
+echo "          $ABS_BASE/scripts/splashbox-parser0 \"how are you\"" >&2
 echo "" >&2
 echo "        - Tell the command bot to run a command: " >&2
-echo "          $ABS_BASE/scripts/splashbox-parser0 run xterm" >&2
+echo "          $ABS_BASE/scripts/splashbox-parser0 \"run xterm\"" >&2
 echo "" >&2
 echo "        - Try a google search: " >&2
-echo "          $ABS_BASE/scripts/splashbox-parser0 search OpenSplash-project" >&2
+echo "          $ABS_BASE/scripts/splashbox-parser0 \"search OpenSplash-project\"" >&2
 echo " ======================================================================" >&2
 

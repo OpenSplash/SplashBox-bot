@@ -1,4 +1,11 @@
 Author: Youchen Lee <kobe.lee@splashtop.com>
+Date:   Tue Jan 11 17:35:59 2011 +0800
+	- Put message parser into DBus session (/org/opensplash/bot/langage/Parser)
+	- Make splasbox-parser0 access to DBus directly.
+	- DBus session now initialized in splashbox-daemon
+	- Re-indent some scripts, change 8 spaces to tab.
+
+Author: Youchen Lee <kobe.lee@splashtop.com>
 Date:	Wed Jan  5 17:12:57 2011 +0800
 	- SplashBox module.
 	- Call check_job via DBus.

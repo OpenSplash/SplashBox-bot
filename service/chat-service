@@ -35,8 +35,8 @@ class DBusBotService(dbus.service.Object):
 	aiml_file = './aiml/*.aiml';
 
 	def __init__(self):
-		bus_name = dbus.service.BusName('org.opensplash.bot', bus=dbus.SessionBus())
-		dbus.service.Object.__init__(self, bus_name, '/org/opensplash/bot/Chat')
+		bus_name = dbus.service.BusName('org.opensplash.chatbot', bus=dbus.SessionBus())
+		dbus.service.Object.__init__(self, bus_name, '/org/opensplash/chatbot/Chat')
 		if len( glob.glob (self.aiml_file) ) == 0:
 			sys.stderr.write("ERROR: No AIML files found. Cannot start service.\n")
 			sys.exit(1);
@@ -49,7 +49,7 @@ class DBusBotService(dbus.service.Object):
 		self.bot.setBotPredicate('genus', 'robot')
 
 		self.bot.setPredicate('name', getpass.getuser() )
-	@dbus.service.method('org.opensplash.bot.Chat',  in_signature='s', out_signature='s')
+	@dbus.service.method('org.opensplash.chatbot.Chat',  in_signature='s', out_signature='s')
 	def hello(self, strin):
 		return self.bot.respond(strin)
  

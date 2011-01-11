@@ -23,67 +23,12 @@ use warnings;
 
 use Net::DBus;
 
-use SplashBox;
-use SplashBox::Language::Parser;
+my $parser = Net::DBus->session
+	->get_service('org.opensplash.bot')
+	->get_object('/org/opensplash/bot/language/Parser')
+	;
 
-
-sub init {
-	if ( ! -e "$JOB_PATH" ) {
-		system "mkdir -p $JOB_PATH";
-	}
-	system "mkdir -p $JOB_PATH/now";
-	system "mkdir -p $JOB_PATH/later";
-	system "mkdir -p $JOB_PATH/routine";
-
-}
-
-
-init();
-
-my @list_action = <$DATA_PATH/action/*.xml>;
-my $action;
-my @list_time = <$DATA_PATH/time/*.xml>;
-my $time;
-my $parser = SplashBox::Language::Parser->new();
-
-my $is_chat_message = 1;
-foreach $action (@list_action) {
-	$action =~ s#.*/##;
-	$action =~ s#\.xml##;
-
-	if ("@ARGV" =~ /\b$action\b/i )
-	{
-		SplashBox::show_log ("Got action='$action'");
-		$is_chat_message = 0;
-		$parser->dispatcher ($action, "@ARGV");
-		last;
-	}
-}
-
-foreach $time (@list_time) {
-	$time =~ s#.*/##;
-	$time =~ s#\.xml##;
-	$time =~ s#_# #;
-
-	if ("@ARGV" =~ /\b$time\b/i )
-	{
-		SplashBox::show_log ("Got time='$time'");
-		last;
-	}
-}
-
-# Pass unknown messages to the chat bot.
-if ( $is_chat_message eq 1 )
-{
-	system("$BOT_PATH/chat \"@ARGV\"");
-}
-
-
-# Trigger to check_job
-my $trigger = Net::DBus->session
-	->get_service('org.opensplash.bot.job')
-	->get_object('/org/opensplash/bot/job/Trigger')
-;
-
-$trigger->check_job();
+my $msg = @ARGV[0];
+my $return_msg = $parser->say($msg);
+print "$return_msg\n";
 

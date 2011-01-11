@@ -27,8 +27,8 @@ use Net::DBus;
 my $message = $ARGV[0];
 
 my $chat = Net::DBus->session
-	->get_service('org.opensplash.bot')
-	->get_object('/org/opensplash/bot/Chat')
+	->get_service('org.opensplash.chatbot')
+	->get_object('/org/opensplash/chatbot/Chat')
 ;
 
 my $greeting = $chat->hello($message);

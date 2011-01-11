@@ -1,5 +1,12 @@
 = TODOs =
+[infrustructure]
+ - Fix some messing-up callings in perl modules.
+ - Support global configs
+ - Support installation.
+
+[parser]
  - Time Parser. (Later and Routine sections.)
- - Global configs
  - Use perl Template instead of string repleace in parser and action-type-creator
- - Dbus interface to call the splashbox-daemon to check the tasks now.
+ - Support more actions.
+ - Support unknown messages and A.I. learning.
+

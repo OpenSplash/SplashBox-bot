@@ -24,41 +24,45 @@ use warnings;
 
 use UUID;
 use XML::Simple;
+use Fcntl qw(:flock);
 
 use SplashBox;
 
 
 sub new {
-        my ($this, %opts) = @_;
-        my $class = ref($this) || $this;
+	my ($this, %opts) = @_;
+	my $class = ref($this) || $this;
 
-        my $self = {};
-        bless $self, $class;
+	my $self = {};
+	bless $self, $class;
 
-        return $self;
+	return $self;
 }
 
 sub check_job {
-        my @jobs = <$JOB_PATH/now/*.xml>;
-	my $xml = new XML::Simple;
-        foreach my $thisjob (@jobs) {
-                my $data = $xml->XMLin("$thisjob");
-#               print Dumper($data);
-                my $user = $data->{'data'}->{'user'};
-                my $robot = $data->{'meta'}->{'robot'};
-                my $raw = $data->{'data'}->{'raw'};
+	open  LH, ">/tmp/opensplash-check-job.pid" or die "Can't open /tmp/opensplash-check-job.pid";
+	flock LH, LOCK_EX|LOCK_NB or return;
 
-                # Call robot.
-                printf STDERR ("%s runs '%s %s'\n", $user, $BOT_PATH . $robot, $raw);
-                if ( -x "$BOT_PATH$robot" ) {
-                        system("$BOT_PATH$robot '$raw'");
-                        unlink $thisjob;
-                }
-                else
-                {
-                        print STDERR "No robot $BOT_PATH$robot found.\n";
-                }
-        }
+	my @jobs = <$JOB_PATH/now/*.xml>;
+	my $xml = new XML::Simple;
+	foreach my $thisjob (@jobs) {
+		my $data = $xml->XMLin("$thisjob");
+#	       print Dumper($data);
+		my $user = $data->{'data'}->{'user'};
+		my $robot = $data->{'meta'}->{'robot'};
+		my $raw = $data->{'data'}->{'raw'};
+
+		# Call robot.
+		printf STDERR ("%s runs '%s %s'\n", $user, $BOT_PATH . $robot, $raw);
+		if ( -x "$BOT_PATH$robot" ) {
+			system("$BOT_PATH$robot '$raw'");
+			unlink $thisjob;
+		}
+		else
+		{
+			print STDERR "No robot $BOT_PATH$robot found.\n";
+		}
+	}
 }
 
 1;
