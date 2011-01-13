@@ -28,7 +28,7 @@ my $parser = Net::DBus->session
 	->get_object('/org/opensplash/bot/language/Parser')
 	;
 
-my $msg = @ARGV[0];
+my $msg = $ARGV[0];
 my $return_msg = $parser->say($msg);
 print "$return_msg\n";
 

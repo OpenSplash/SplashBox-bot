@@ -1,0 +1,10 @@
+SplashBox/Job/Trigger.pm
+SplashBox/Language/Parser.pm
+SplashBox/DBus/Trigger.pm
+SplashBox/DBus/Parser.pm
+SplashBox.pm
+bin/splashbox-action-creator
+bin/splashbox-daemon
+bin/splashbox-parser0
+Makefile.PL
+MANIFEST

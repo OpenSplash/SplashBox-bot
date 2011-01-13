@@ -1,4 +1,8 @@
 Author: Youchen Lee <kobe.lee@splashtop.com>
+Date:   Thu Jan 13 16:57:21 2011 +0800
+	- Refine pathes, prepare for installation.
+
+Author: Youchen Lee <kobe.lee@splashtop.com>
 Date:   Tue Jan 11 17:35:59 2011 +0800
 	- Put message parser into DBus session (/org/opensplash/bot/langage/Parser)
 	- Make splasbox-parser0 access to DBus directly.

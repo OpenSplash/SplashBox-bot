@@ -25,15 +25,16 @@ our $VERSION = '0.0.1';
 
 use Cwd 'abs_path';
 use base qw(Exporter);
-our @EXPORT = qw($ABS_PATH $JOB_PATH $BOT_PATH $DATA_PATH $ACTION_PATH $TEMPLATE_PATH $progname);
+our @EXPORT = qw($ABS_PATH $JOB_PATH $BOT_PATH $DATA_PATH $ACTION_PATH $TEMPLATE_PATH $progname $SPLASHBOX_LIB);
 
 our ($progname) = $0 =~ m#(?:.*/)?([^/]*)#;
 
 # The following lines are automatically fixed at install time
+our $SPLASHBOX_LIB = '/var/lib/splashbox';
 our ($ABS_PATH) = abs_path($0) =~ m#(.*/).*#;
 our $JOB_PATH = '/tmp/splashbox';
-our $BOT_PATH = $ABS_PATH . '../action/';
-our $DATA_PATH = $ABS_PATH . '../data/';
+our $BOT_PATH = $SPLASHBOX_LIB . '/action/';
+our $DATA_PATH = $SPLASHBOX_LIB . '/data/';
 our $ACTION_PATH = $DATA_PATH . 'action';
 our $TEMPLATE_PATH = $DATA_PATH . 'templates';
 

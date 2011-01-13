@@ -24,11 +24,11 @@ use Proc::Daemon;
 use Proc::PID::File;
 use Net::DBus;
 use Net::DBus::Reactor;
-use DBus::Trigger;
-use DBus::Parser;
 use SplashBox;
 use SplashBox::Job::Trigger;
 use SplashBox::Language::Parser;
+use SplashBox::DBus::Trigger;
+use SplashBox::DBus::Parser;
 
 my $xml = new XML::Simple;
 if (defined $ARGV[0] && $ARGV[0] eq "-d")
@@ -43,8 +43,8 @@ if (defined $ARGV[0] && $ARGV[0] eq "-d")
 
 
 my $service = Net::DBus->session->export_service("org.opensplash.bot");
-my $object = DBus::Trigger->new($service);
-my $object2 = DBus::Parser->new($service);
+my $object = SplashBox::DBus::Trigger->new($service);
+my $object2 = SplashBox::DBus::Parser->new($service);
 my $reactor = Net::DBus::Reactor->main();
 my $timer = $reactor->add_timeout(
 	50_000,

@@ -1,5 +1,5 @@
 #
-# DBus::Parser Parser.pm
+# SplashBox::DBus::Trigger Trigger.pm
 #
 # Copyright (c) 2010-2011  The OpenSplash Team
 # http://www.opensplash-project.org/
@@ -17,47 +17,32 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-package DBus::Parser;
+package SplashBox::DBus::Trigger;
 
 use strict;
 use warnings;
-use SplashBox;
-use SplashBox::Language::Parser;
+use SplashBox::Job::Trigger;
 
-use Net::DBus;
-use Net::DBus::Exporter qw(org.opensplash.bot.language);
+use Net::DBus::Exporter qw(org.opensplash.bot.job);
 
 use base qw(Net::DBus::Object);
 
 sub new {
 	my $class = shift;
 	my $service = shift;
-	my $parser = SplashBox::Language::Parser->new();
 
-
-	my $self = $class->SUPER::new($service, "/org/opensplash/bot/language/Parser");
-	$self->{"parser"} = $parser;
+	my $self = $class->SUPER::new($service, "/org/opensplash/bot/job/Trigger");
 	bless $self, $class;
 
 	return $self;
 }
 
 
-dbus_method("say", ["string"], ["string"]);
+dbus_method("check_job", [], []);
 
-sub say {
-	my ($self, $args) = @_;
-	my $is_chat_message = $self->{"parser"}->parser($args);
-	my $return_msg = "";
-	if ($is_chat_message)
-	{
-		my $chat = Net::DBus->session
-			->get_service('org.opensplash.chatbot')
-			->get_object('/org/opensplash/chatbot/Chat')
-			;
-		$return_msg = $chat->hello($args);
-
-	}
-	return $return_msg;
+sub check_job {
+	my $self = shift;
+	my $name = shift;
+	SplashBox::Job::Trigger::check_job();
 }
 1;

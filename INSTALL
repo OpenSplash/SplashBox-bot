@@ -1,6 +1,4 @@
-There is currently no installation needed.
-
-Packages may need to be pre-installed:
+ == Packages may need to be pre-installed:
  - libproc-daemon-perl
  - libproc-pid-file-perl
  - libxml-simple-perl
@@ -10,3 +8,17 @@ Packages may need to be pre-installed:
  - python-aiml
 
 
+($ -> normal user)
+(# -> need root permission)
+
+ == Install SplashBox
+  $cd scripts
+  $perl Makefile.PL
+  $make
+  #make install
+
+
+ == Install Chat Service and other data
+  $./local-install.sh
+  #cp -rf INSTALL_PREFIX/var/lib/splashbox /var/lib/
+ 

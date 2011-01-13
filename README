@@ -1,8 +1,33 @@
 SplashBox Natural Language Framework
 
-Use the following steps to run the service and test it:
- - ./quick-start.sh
+ ==== INSTALLATION ====
+ - Read "INSTALL" to install the chat-service and SplashBox module.
 
+
+ ==== RUN THE DAEMON ====
+ (For your system secure, please run these comands as normal user.)
+ - Run the chat-service in background
+   nohup /var/lib/splashbox/chat-service/chat-service &
+ - Run splashbox-daemon in background
+   nohup splashbox-daemon &
+
+ ==== TEST IT ====
+ - Use a console frontend
+   splashbox-parser0 "YOUR MESSAGE"
+
+ - Try a Gtk+ frontend
+   check this project https://github.com/OpenSplash/SplashBox-bot-frontend-gtk
+
+
+ ==== SAMPLE MESSAGES ====
+ - hello
+ - run xterm
+ - echo hi
+ - search something
+ - google something
+
+
+ ==== MORE INFO ====
 Available Bots Now:
  - A chat bot (default):
 	chat
@@ -15,10 +40,10 @@ Available Bots Now:
 	google
 
 
-LICENSES:
- - All documents and codes are licensed under GPLv3
+ ==== LICENSE ====
+ - All documents and codes are licensed under GNU GPL
 
-
-CREDITS:
+ ==== CREDITS ====
  - AIML files copyright by the A.L.I.C.E Foundation, please download them yourself if necessary with the download-aiml.sh command
    - http://www.alicebot.org/aiml/aaa/
+
