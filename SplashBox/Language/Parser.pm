@@ -104,7 +104,6 @@ sub parser {
 		}
 	}
 	
-	SplashBox::Job::Trigger::check_job();
 	return $is_chat_message;
 }
 

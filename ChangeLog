@@ -1,4 +1,9 @@
 Author: Youchen Lee <kobe.lee@splashtop.com>
+Date:	Mon Jan 17 16:39:03 2011 +0800
+	- Support sending back reply message with non-chatterbot
+	- Support dev mode to check current running folder first.
+
+Author: Youchen Lee <kobe.lee@splashtop.com>
 Date:   Thu Jan 13 16:57:21 2011 +0800
 	- Refine pathes, prepare for installation.
 

@@ -21,6 +21,7 @@
 command=$*
 user=
 datetime=
+is_command=0
 
 # handle datetime here
 # strip action here
@@ -29,9 +30,16 @@ command=$(echo $command | sed -e 's/run//i' -e 's/execute//i')
 
 
 for program in $command; do
-	which $program
+	which $program > /dev/null
 	if [ $? == 0 ]; then
+		is_command=1
 		nohup $program > /dev/null &
 	fi
 done;
+
+if [ $is_command -eq 1 ]; then
+	echo "Yes sir, I will run that for you."
+else
+	echo "Sorry sir, I cannot find the command."
+fi
 

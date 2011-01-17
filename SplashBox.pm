@@ -29,9 +29,16 @@ our @EXPORT = qw($ABS_PATH $JOB_PATH $BOT_PATH $DATA_PATH $ACTION_PATH $TEMPLATE
 
 our ($progname) = $0 =~ m#(?:.*/)?([^/]*)#;
 
-# The following lines are automatically fixed at install time
+# Change $IS_DEV to 1 for local development.
+our $IS_DEV = 0;
+
 our $SPLASHBOX_LIB = '/var/lib/splashbox';
 our ($ABS_PATH) = abs_path($0) =~ m#(.*/).*#;
+if ($IS_DEV == 1)
+{
+	$SPLASHBOX_LIB = "$ABS_PATH..";
+}
+
 our $JOB_PATH = '/tmp/splashbox';
 our $BOT_PATH = $SPLASHBOX_LIB . '/action/';
 our $DATA_PATH = $SPLASHBOX_LIB . '/data/';
@@ -41,6 +48,15 @@ our $TEMPLATE_PATH = $DATA_PATH . 'templates';
 sub show_log
 {
 	printf (STDERR "- %20s - %s\n", "[$progname]",  @_);
+}
+
+sub show_pathinfo
+{
+	printf (STDERR " JOB_PATH=$JOB_PATH\n" );
+	printf (STDERR " BOT_PATH=$BOT_PATH\n" );
+	printf (STDERR " DATA_PATH=$DATA_PATH\n" );
+	printf (STDERR " ACTION_PATH=$ACTION_PATH\n" );
+	printf (STDERR " TEMPLATE_PATH=$TEMPLATE_PATH\n" );
 }
 
 1;

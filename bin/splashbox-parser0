@@ -30,5 +30,7 @@ my $parser = Net::DBus->session
 
 my $msg = $ARGV[0];
 my $return_msg = $parser->say($msg);
+
+chomp($return_msg);
 print "$return_msg\n";
 

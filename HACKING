@@ -29,3 +29,8 @@
  * Your bot will be triggered by "./scripts/splashbox-parser0 yo MESSAGES" and take MESSAGES as the arguments.
  ** (Make sure splashbox-daemon is running)
 
+=== Developer Mode ===
+ * In SplashBox.pm, modify $IS_DEV to 1 to turn on developer mode.
+ * In developer mode, the splashbox-daemon check current dir instead of /var/lib/splashbox
+ * Also please remember to overwrite the PERLLIB environment variable when necessary.
+

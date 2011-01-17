@@ -58,6 +58,11 @@ sub say {
 		$return_msg = $chat->hello($args);
 
 	}
+	else
+	{
+		print ("HERE\n");
+		$return_msg = SplashBox::Job::Trigger::check_job();
+	}
 	return $return_msg;
 }
 1;

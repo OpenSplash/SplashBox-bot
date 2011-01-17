@@ -43,6 +43,7 @@ sub check_job {
 	open  LH, ">/tmp/opensplash-check-job.pid" or die "Can't open /tmp/opensplash-check-job.pid";
 	flock LH, LOCK_EX|LOCK_NB or return;
 
+	my $return_str = '';
 	my @jobs = <$JOB_PATH/now/*.xml>;
 	my $xml = new XML::Simple;
 	foreach my $thisjob (@jobs) {
@@ -55,14 +56,22 @@ sub check_job {
 		# Call robot.
 		printf STDERR ("%s runs '%s %s'\n", $user, $BOT_PATH . $robot, $raw);
 		if ( -x "$BOT_PATH$robot" ) {
-			system("$BOT_PATH$robot '$raw'");
+			open COMMAND, "$BOT_PATH$robot '$raw' |";
 			unlink $thisjob;
 		}
 		else
 		{
 			print STDERR "No robot $BOT_PATH$robot found.\n";
 		}
+
+		while (<COMMAND>)
+		{
+			$return_str = $_;
+		}
 	}
+	close LH;
+	close COMMAND;
+	return $return_str;
 }
 
 1;

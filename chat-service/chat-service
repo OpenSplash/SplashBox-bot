@@ -32,14 +32,17 @@ from dbus.mainloop.glib import DBusGMainLoop
 class DBusBotService(dbus.service.Object):
 
 	bot = aiml.Kernel()
+	aiml_file_dev = './AIML/*.aiml';
 	aiml_file = '/var/lib/splashbox/chat-service/AIML/*.aiml';
 
 	def __init__(self):
 		bus_name = dbus.service.BusName('org.opensplash.chatbot', bus=dbus.SessionBus())
 		dbus.service.Object.__init__(self, bus_name, '/org/opensplash/chatbot/Chat')
-		if len( glob.glob (self.aiml_file) ) == 0:
-			sys.stderr.write("ERROR: No AIML files found. Cannot start service.\n")
-			sys.exit(1);
+
+		if len( glob.glob (self.aiml_file_dev) ) == 0:
+			if len( glob.glob (self.aiml_file) ) == 0:
+				sys.stderr.write("ERROR: No AIML files found. Cannot start service.\n")
+				sys.exit(1);
 		self.bot.learn(self.aiml_file)
 
 		self.bot.setBotPredicate('gender', 'male')
