@@ -39,38 +39,72 @@ sub new {
 	return $self;
 }
 
+
+sub _run {
+	my ($this_job, $user, $robot, $raw) = @_;
+	my $return_str = "";
+	printf STDERR ("%s runs '%s %s'\n", $user, $BOT_PATH . $robot, $raw);
+	if ( -x "$BOT_PATH$robot" ) {
+		open COMMAND, "$BOT_PATH$robot '$raw' |";
+		unlink $this_job;
+	}
+	else
+	{
+		print STDERR "No robot $BOT_PATH$robot found.\n";
+	}
+
+	while (<COMMAND>)
+	{
+		$return_str = $_;
+	}
+	close COMMAND;
+	return $return_str;
+}
+
 sub check_job {
+	my ($job_type) = @_;
 	open  LH, ">/tmp/opensplash-check-job.pid" or die "Can't open /tmp/opensplash-check-job.pid";
 	flock LH, LOCK_EX|LOCK_NB or return;
 
 	my $return_str = '';
-	my @jobs = <$JOB_PATH/now/*.xml>;
+	my @jobs;
+	if ($job_type eq "now")
+	{
+		@jobs = <$JOB_PATH/now/*.xml>;
+	}
+	if ($job_type eq "later")
+	{
+		@jobs = <$JOB_PATH/later/*.xml>;
+	}
+	if ($job_type eq "routine")
+	{
+		@jobs = <$JOB_PATH/routine/*.xml>;
+	}
+
 	my $xml = new XML::Simple;
-	foreach my $thisjob (@jobs) {
-		my $data = $xml->XMLin("$thisjob");
-#	       print Dumper($data);
+	my $now_date = time();
+	foreach my $this_job (@jobs) {
+		my $data = $xml->XMLin("$this_job");
 		my $user = $data->{'data'}->{'user'};
 		my $robot = $data->{'meta'}->{'robot'};
 		my $raw = $data->{'data'}->{'raw'};
+		my $next_run_date = $data->{'data'}->{'next_run_date'};
 
-		# Call robot.
-		printf STDERR ("%s runs '%s %s'\n", $user, $BOT_PATH . $robot, $raw);
-		if ( -x "$BOT_PATH$robot" ) {
-			open COMMAND, "$BOT_PATH$robot '$raw' |";
-			unlink $thisjob;
-		}
-		else
+		if ($job_type eq "now")
 		{
-			print STDERR "No robot $BOT_PATH$robot found.\n";
+			$return_str = _run($this_job, $user, $robot, $raw);
 		}
-
-		while (<COMMAND>)
+		if ($job_type eq "later" && $now_date >= $next_run_date )
 		{
-			$return_str = $_;
+			$return_str = _run($this_job, $user, $robot, $raw);
+		}
+		if ($job_type eq "routine" && $now_date >= $next_run_date)
+		{
+			$return_str = _run($this_job, $user, $robot, $raw);
+			# send $raw to parser again.
 		}
 	}
 	close LH;
-	close COMMAND;
 	return $return_str;
 }
 

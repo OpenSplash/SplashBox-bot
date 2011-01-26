@@ -51,7 +51,8 @@ my $timer = $reactor->add_timeout(
 	Net::DBus::Callback->new(
 		method => sub {
 #			print STRERR "Check Job\n";
-			SplashBox::Job::Trigger::check_job();
+			SplashBox::Job::Trigger::check_job("now");
+			SplashBox::Job::Trigger::check_job("later");
 		},
 	)
 );
@@ -70,7 +71,7 @@ SplashBox::show_pathinfo();
 init();
 
 
-SplashBox::Job::Trigger::check_job();
+SplashBox::Job::Trigger::check_job("now");
 $reactor->run();
 
 print STDERR "Daemon stopped.";

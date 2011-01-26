@@ -38,11 +38,26 @@ sub new {
 }
 
 
-dbus_method("check_job", [], []);
+dbus_method("check_job_now", [], []);
 
-sub check_job {
+sub check_job_now {
 	my $self = shift;
 	my $name = shift;
-	SplashBox::Job::Trigger::check_job();
+	SplashBox::Job::Trigger::check_job("now");
 }
+
+dbus_method("check_job_later", [], []);
+sub check_job_later {
+	my $self = shift;
+	my $name = shift;
+	SplashBox::Job::Trigger::check_job("later");
+}
+
+dbus_method("check_job_routine", [], []);
+sub check_job_routine {
+	my $self = shift;
+	my $name = shift;
+	SplashBox::Job::Trigger::check_job("routine");
+}
+
 1;

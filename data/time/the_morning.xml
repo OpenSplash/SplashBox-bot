@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<time version="20110103001">
+	<meta>
+		<uuid>12c56bec-1cab-46fb-9efd-18fc2d85ef58</uuid>
+		<name>the morning</name>
+		<description>during the morning, in the morning, every morning</description>
+		<author>Youchen Lee</author>
+		<mail>kobe.lee@splashtop.com</mail>
+		<create_date>1295950586</create_date>
+		<update_date>1295950586</update_date>
+		<version>0.0.1</version>
+		<time_code>0600-1200</time_code>
+		<time_period>1d</time_period>
+		<cycle>1</cycle>
+		<depend></depend>
+	</meta>
+</time>

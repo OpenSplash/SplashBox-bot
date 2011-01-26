@@ -1,4 +1,8 @@
 Author: Youchen Lee <kobe.lee@splashtop.com>
+Date:	Wed Jan 26 20:13:50 2011 +0800
+	- Very initial support of time in language parsing.
+
+Author: Youchen Lee <kobe.lee@splashtop.com>
 Date:	Mon Jan 17 16:39:03 2011 +0800
 	- Support sending back reply message with non-chatterbot
 	- Support dev mode to check current running folder first.

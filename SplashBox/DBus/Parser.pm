@@ -60,8 +60,7 @@ sub say {
 	}
 	else
 	{
-		print ("HERE\n");
-		$return_msg = SplashBox::Job::Trigger::check_job();
+		$return_msg = SplashBox::Job::Trigger::check_job("now");
 	}
 	return $return_msg;
 }

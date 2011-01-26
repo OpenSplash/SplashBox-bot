@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<action version="20101222001">
+<action version="20110125001">
 	<meta>
 		<uuid>4077912f-cda4-4518-a508-ff2850648477</uuid>
 		<name>search</name>
 		<author>Youchen Lee</author>
 		<mail>kobe.lee@splashtop.com</mail>
 		<create_date>1294043215</create_date>
-		<update_date>1294043215</update_date>
+		<update_date>1295929245</update_date>
 		<version>0.1</version>
 		<robot>search</robot>
 	</meta>
@@ -15,6 +15,7 @@
 		<user>{user}</user>
 		<create_date>{create_date}</create_date>
 		<update_date>{update_date}</update_date>
+		<next_run_date>{next_run_date}</next_run_date>
 		<raw>{raw}</raw>
 	</data>
 </action>

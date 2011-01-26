@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <time version="20110103001">
 	<meta>
-		<uuid>d4c84301-6fab-40b8-888f-0662d1814271</uuid>
-		<name>everyday</name>
-		<description>everyday</description>
+		<uuid>588a5173-7b14-4f39-b30b-9089d76cdef6</uuid>
+		<name>tomorrow</name>
+		<description>tomorrow</description>
 		<author>Youchen Lee</author>
 		<mail>kobe.lee@splashtop.com</mail>
-		<create_date>1295506476</create_date>
-		<update_date>1295506476</update_date>
+		<create_date>1295950774</create_date>
+		<update_date>1295950774</update_date>
 		<version>0.0.1</version>
 		<time_code>0</time_code>
 		<time_period>1d</time_period>
-		<cycle>1</cycle>
+		<cycle>0</cycle>
 		<depend></depend>
 	</meta>
 </time>
