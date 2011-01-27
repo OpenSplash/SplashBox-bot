@@ -103,7 +103,7 @@ sub _time_parser {
 			SplashBox::show_log ("Got time='$time_string'");
 			my $xml_data = $xml->XMLin("$each_time_file");
 			my $time_code = $xml_data->{"meta"}->{"time_code"};
-			my $time_circle = $xml_data->{"meta"}->{"circle"};
+			my $time_cycle = $xml_data->{"meta"}->{"cycle"};
 			my $time_period = $xml_data->{"meta"}->{"time_period"};
 
 			my ($time_num, $time_type) = $time_period =~ m#([0-9]+)([a-zA-Z]+)#;
@@ -114,7 +114,7 @@ sub _time_parser {
 
 			$next_run_date = time() + ($time_num * $base_period);
 			$time_tag{'time_code'} = $time_code;
-			$time_tag{'time_circle'} = $time_circle;
+			$time_tag{'time_cycle'} = $time_cycle;
 			$time_tag{'time_period'} = $time_period;
 
 			# TODO parse time file here.
@@ -140,7 +140,7 @@ sub parser {
 		if ("$msg" =~ /\b$action\b/i )
 		{
 			SplashBox::show_log ("Got action='$action'");
-			$next_run_date = _time_parser("$msg");
+			($next_run_date, $is_cycle) = _time_parser("$msg");
 
 			$is_chat_message = 0;
 			$self->dispatcher ($action, "$msg", $next_run_date);
