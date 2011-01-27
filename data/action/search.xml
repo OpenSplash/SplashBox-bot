@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<action version="20110125001">
+<action version="20110127001">
 	<meta>
 		<uuid>4077912f-cda4-4518-a508-ff2850648477</uuid>
 		<name>search</name>
@@ -16,6 +16,8 @@
 		<create_date>{create_date}</create_date>
 		<update_date>{update_date}</update_date>
 		<next_run_date>{next_run_date}</next_run_date>
+		<time_period>{time_period}</time_period>
+		<cycle>{cycle}</cycle>
 		<raw>{raw}</raw>
 	</data>
 </action>

@@ -64,7 +64,6 @@ sub init {
         }
         system "mkdir -p $JOB_PATH/now";
         system "mkdir -p $JOB_PATH/later";
-        system "mkdir -p $JOB_PATH/routine";
 }
 
 SplashBox::show_pathinfo();

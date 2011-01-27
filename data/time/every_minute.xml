@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<time version="20110103001">
+	<meta>
+		<uuid>f31572a5-d9a0-4a86-aa1c-8197cc97e935</uuid>
+		<name>every_minute</name>
+		<description>Every minute</description>
+		<author>Youchen Lee</author>
+		<mail>kobe.lee@splashtop.com</mail>
+		<create_date>1296117325</create_date>
+		<update_date>1296117325</update_date>
+		<version>0.0.1</version>
+		<time_code>0</time_code>
+		<time_period>1m</time_period>
+		<cycle>1</cycle>
+		<depend></depend>
+	</meta>
+</time>

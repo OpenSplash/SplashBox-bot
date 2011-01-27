@@ -42,27 +42,32 @@ sub new {
 
 sub _run {
 	my ($this_job, $user, $robot, $raw) = @_;
-	my $return_str = "";
+	my %return_value;
+	$return_value{'run_status'} = 0;
+	$return_value{'msg'} = "";
+
 	printf STDERR ("%s runs '%s %s'\n", $user, $BOT_PATH . $robot, $raw);
 	if ( -x "$BOT_PATH$robot" ) {
 		open COMMAND, "$BOT_PATH$robot '$raw' |";
-		unlink $this_job;
 	}
 	else
 	{
 		print STDERR "No robot $BOT_PATH$robot found.\n";
+		$return_value{'run_status'} = 1;
 	}
 
 	while (<COMMAND>)
 	{
-		$return_str = $_;
+		$return_value{'msg'} = $_;
 	}
 	close COMMAND;
-	return $return_str;
+	return %return_value;
 }
 
 sub check_job {
 	my ($job_type) = @_;
+	my $is_time = 0;
+	my %return_value;
 	open  LH, ">/tmp/opensplash-check-job.pid" or die "Can't open /tmp/opensplash-check-job.pid";
 	flock LH, LOCK_EX|LOCK_NB or return;
 
@@ -76,36 +81,53 @@ sub check_job {
 	{
 		@jobs = <$JOB_PATH/later/*.xml>;
 	}
-	if ($job_type eq "routine")
-	{
-		@jobs = <$JOB_PATH/routine/*.xml>;
-	}
 
 	my $xml = new XML::Simple;
 	my $now_date = time();
 	foreach my $this_job (@jobs) {
+		$return_value{'run_status'} = 0;
+		$return_value{'msg'} = '';
+		$is_time = 0;
 		my $data = $xml->XMLin("$this_job");
 		my $user = $data->{'data'}->{'user'};
 		my $robot = $data->{'meta'}->{'robot'};
 		my $raw = $data->{'data'}->{'raw'};
+		my $cycle = $data->{'data'}->{'cycle'};
 		my $next_run_date = $data->{'data'}->{'next_run_date'};
+		my $time_period = $data->{'data'}->{'time_period'};
 
 		if ($job_type eq "now")
 		{
-			$return_str = _run($this_job, $user, $robot, $raw);
+			$is_time = 1;
+			%return_value = _run($this_job, $user, $robot, $raw);
+
 		}
 		if ($job_type eq "later" && $now_date >= $next_run_date )
 		{
-			$return_str = _run($this_job, $user, $robot, $raw);
+			$is_time = 1;
+			%return_value = _run($this_job, $user, $robot, $raw);
 		}
-		if ($job_type eq "routine" && $now_date >= $next_run_date)
+
+		if ($is_time == 1)
 		{
-			$return_str = _run($this_job, $user, $robot, $raw);
-			# send $raw to parser again.
+			if ($return_value{'run_status'} == 0 && $cycle == 0)
+			{
+				unlink $this_job;
+			}
+			elsif($time_period != 0 && $cycle != 0)
+			{
+				# Update next_run_date and write to the same file.
+				$data->{'data'}->{'next_run_date'} = time() + $time_period;
+				my $xml = $xml->XMLout($data);
+				open XML, ">$this_job";
+				print XML $xml;
+				close XML;
+			}
 		}
+
 	}
 	close LH;
-	return $return_str;
+	return $return_value{'msg'};
 }
 
 1;

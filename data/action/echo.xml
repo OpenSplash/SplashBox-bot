@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<action version="20110125001">
+<action version="20110127001">
 	<meta>
 		<uuid>8a85592c-743a-49d1-8395-0eaa42360a42</uuid>
 		<name>echo</name>
@@ -17,6 +17,8 @@
 		<create_date>{create_date}</create_date>
 		<update_date>{update_date}</update_date>
 		<next_run_date>{next_run_date}</next_run_date>
+		<time_period>{time_period}</time_period>
+		<cycle>{cycle}</cycle>
 		<raw>{raw}</raw>
 	</data>
 </action>

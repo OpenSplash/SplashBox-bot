@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<time version="20110103001">
+	<meta>
+		<uuid>031ed719-db38-46ae-9a7d-5c14a7fc23e0</uuid>
+		<name>few_minutes_later</name>
+		<description>Few minutes later</description>
+		<author>Youchen Lee</author>
+		<mail>kobe.lee@splashtop.com</mail>
+		<create_date>1296116424</create_date>
+		<update_date>1296116424</update_date>
+		<version>0.0.1</version>
+		<time_code>0</time_code>
+		<time_period>5m</time_period>
+		<cycle>0</cycle>
+		<depend></depend>
+	</meta>
+</time>

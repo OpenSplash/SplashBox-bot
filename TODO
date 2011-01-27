@@ -3,9 +3,9 @@
  - Fix some messing-up callings in perl modules.
  - Support global configs
  - Support installation.
+ - Support python-aiml locally.
 
 [parser]
- - Time Parser. (Later and Routine sections.)
  - Use perl Template instead of string repleace in parser and action-type-creator
  - Support more actions.
  - Support unknown messages and A.I. learning.

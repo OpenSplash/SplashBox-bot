@@ -1,4 +1,9 @@
 Author: Youchen Lee <kobe.lee@splashtop.com>
+Date:	Thu Jan 27 16:58:04 2011 +0800
+	- Support routine jobs and later jobs. Combine "routine" and "later".
+	- Add a few more time data.
+
+Author: Youchen Lee <kobe.lee@splashtop.com>
 Date:	Wed Jan 26 20:13:50 2011 +0800
 	- Very initial support of time in language parsing.
 
