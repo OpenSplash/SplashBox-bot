@@ -91,7 +91,6 @@ sub dispatcher {
 sub _time_parser {
 	my ($msg) = @_;
 	my @list_time = <$DATA_PATH/time/*.xml>;
-	my $each_time_file;
 	my $next_run_date = 0;
 	my $time_is_cycle = 0;
 	my $time_period = 0;
@@ -100,7 +99,7 @@ sub _time_parser {
 
 	my $xml = new XML::Simple;
 
-	foreach $each_time_file (@list_time) {
+	foreach my $each_time_file (@list_time) {
 		$time_string = $each_time_file;
 		$time_string =~ s#.*/##;
 		$time_string =~ s#\.xml##;
@@ -128,7 +127,7 @@ sub _time_parser {
 				$base_period = 60 * 60 * 24 * 7;
 			}
 
-			$time_period = $base_period * $time_num; #FIXME
+			$time_period = $base_period * $time_num;
 			$next_run_date = time() + $time_period;
 
 			last;
