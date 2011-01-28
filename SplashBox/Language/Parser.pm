@@ -38,15 +38,12 @@ sub new {
 }
 
 sub fill_xml {
-	my ($self, $raw_xml, $args) = @_;
-	my %subsitution_array = split(/[;=]/, $args);
+	my ($self, $raw_xml, %substitution_hash) = @_;
 
-	foreach my $key (keys %subsitution_array){
-		$subsitution_array{$key} =~ s/["']//g;
-		#print "$key = ";
-		#print "$subsitution_array{$key}\n";
+	foreach my $key (keys %substitution_hash){
+		$substitution_hash{$key} =~ s/["']//g;
 
-		$raw_xml =~ s/{$key}/$subsitution_array{$key}/g;
+		$raw_xml =~ s/{$key}/$substitution_hash{$key}/g;
 	}
 	return $raw_xml;
 }
@@ -59,10 +56,20 @@ sub dispatcher {
 	my ($uuid, $uuid_string);
 	UUID::generate($uuid);
 	UUID::unparse($uuid, $uuid_string);
-	my $epoch_seconds = time();
+	my $create_date = time();
 	my $time_type = '';
 
-	$raw_xml = $self->fill_xml ($raw_xml, "user='$ENV{USER}';raw='$raw';uuid='$uuid_string';create_date='$epoch_seconds';next_run_date='$next_run_date';time_period='$time_period';cycle='$is_cycle'");
+	my %substitution_hash = (
+		'user' => "$ENV{USER}",
+		'raw' => "$raw",
+		'uuid' => "$uuid_string",
+		'create_date' => "$create_date",
+		'next_run_date' => "$next_run_date",
+		'time_period' => "$time_period",
+		'cycle' => "$is_cycle"
+	);
+
+	$raw_xml = $self->fill_xml ($raw_xml, %substitution_hash);
 
 
 	if ($next_run_date == 0)
