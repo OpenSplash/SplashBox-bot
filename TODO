@@ -3,7 +3,6 @@
  - Fix some messing-up callings in perl modules.
  - Support global configs
  - Support installation.
- - Support python-aiml locally.
 
 [parser]
  - Use perl Template instead of string repleace in parser and action-type-creator
