@@ -1,4 +1,9 @@
 Author: Youchen Lee <kobe.lee@splashtop.com>
+Date:	Fri Jan 28 17:57:31 2011 +0800
+	- Remove python-aiml dependence, support it directly in Splashbox-bot.
+	- Bump version to 0.0.2
+
+Author: Youchen Lee <kobe.lee@splashtop.com>
 Date:	Thu Jan 27 16:58:04 2011 +0800
 	- Support routine jobs and later jobs. Combine "routine" and "later".
 	- Add a few more time data.

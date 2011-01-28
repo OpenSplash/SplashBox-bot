@@ -108,6 +108,7 @@ sub check_job {
 			%return_value = _run($this_job, $user, $robot, $raw);
 		}
 
+		# is time to handle this task
 		if ($is_time == 1)
 		{
 			if ($return_value{'run_status'} == 0 && $cycle == 0)
