@@ -49,3 +49,6 @@ Available Bots Now:
  - AIML files copyright by the A.L.I.C.E Foundation, please download them yourself if necessary with the download-aiml.sh command
    - http://www.alicebot.org/aiml/aaa/
 
+ - Python-AIML library is under FreeBSD license
+   - http://pyaiml.sourceforge.net/
+
