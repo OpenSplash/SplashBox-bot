@@ -1,7 +1,7 @@
 Author: Youchen Lee <kobe.lee@splashtop.com>
 Date:	Fri Jan 28 17:57:31 2011 +0800
 	- Remove python-aiml dependence, support it directly in Splashbox-bot.
-	- Bump version to 0.0.2
+	- Version reset to 0.0.1
 
 Author: Youchen Lee <kobe.lee@splashtop.com>
 Date:	Thu Jan 27 16:58:04 2011 +0800
