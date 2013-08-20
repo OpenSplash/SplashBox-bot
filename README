@@ -5,7 +5,7 @@ SplashBox Natural Language Framework
 
 
  ==== RUN THE DAEMON ====
- (For your system secure, please run these comands as normal user.)
+ (For your system secure, please run these commands as normal user.)
  - Run the chat-service in background
    nohup /var/lib/splashbox/chat-service/chat-service &
  - Run splashbox-daemon in background
